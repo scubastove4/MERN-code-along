@@ -5,6 +5,7 @@ const routes = require('./routes')
 
 const app = express()
 
+//MIDDLEWARE
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 app.use(express.static(`${__dirname}/client/build`))

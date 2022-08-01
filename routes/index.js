@@ -2,13 +2,14 @@ const { Router } = require('express')
 const router = Router()
 const controllers = require('../controllers') //could also destructure restaurants from controllers
 
-//get all restaurants
+// restaurant routes
 router.get('/restaurants', controllers.restaurants.getAllRestaurants)
-
-//create new restaurant
 router.post('/restaurants', controllers.restaurants.createRestaurant)
-
-//get one restaurant
 router.get('/restaurants/:id', controllers.restaurants.getRestaurantById)
+
+//review routes
+router.get('/reviews', (req, res) => {
+  res.send('reviews route works!')
+})
 
 module.exports = router
