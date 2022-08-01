@@ -8,8 +8,9 @@ const { Restaurant } = require('./models')
 
 app.use(express.static(`${__dirname}/client/build`))
 
-app.get('/restaurants', (req, res) => {
-  res.send('I am root')
+app.get('/restaurants', async (req, res) => {
+  const restaurants = await Restaurant.find()
+  res.send({ restaurants })
 })
 
 app.get('/*', (req, res) => {
