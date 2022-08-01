@@ -9,16 +9,17 @@ const getAllReviews = async (req, res) => {
 
 //create new restaurant
 const createReview = async (req, res) => {
-  let newReview = await Review.create(req.body)
   let restaurant = await Restaurant.findById(req.params.id)
+  let reviewBody = { ...req.body, restaurant: req.params.id }
+  let newReview = await Review.create(reviewBody)
   restaurant.reviews.push(newReview._id)
   restaurant.save()
-  res.send(restaurant)
+  res.send(newReview)
 }
 
 // get one restaurant
 const getReviewById = async (req, res) => {
-  let review = await Review.findById(req.params.id)
+  let review = await Review.findById(req.params.id).populate('restaurant')
   res.send({ review })
 }
 
