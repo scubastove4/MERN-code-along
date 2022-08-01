@@ -14,8 +14,8 @@ const createRestaurant = async (req, res) => {
 
 //get one restaurant
 const getRestaurantById = async (req, res) => {
-  let restaurantById = await Restaurant.findById(req.params.id)
-  res.send({ restaurantById })
+  let restaurant = await Restaurant.findById(req.params.id)
+  res.send({ restaurant })
 }
 
 module.exports = {

@@ -12,13 +12,14 @@ const createReview = async (req, res) => {
   res.send(newReview)
 }
 
-//get one restaurant
-// const getRestaurantById = async (req, res) => {
-//   let restaurantById = await Restaurant.findById(req.params.id)
-//   res.send({ restaurantById })
-// }
+// get one restaurant
+const getReviewById = async (req, res) => {
+  let review = await Review.findById(req.params.id)
+  res.send({ review })
+}
 
 module.exports = {
   getAllReviews,
-  createReview
+  createReview,
+  getReviewById
 }
