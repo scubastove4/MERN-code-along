@@ -1,7 +1,13 @@
 const mongoose = require('mongoose')
+require('dotenv').config()
+
+let dbUrl =
+  process.env.NODE_ENV === 'production'
+    ? process.env.MONGODB_URL
+    : 'mongodb://127.0.0.1:27017/restaurantsDatabase'
 
 mongoose
-  .connect('mongodb://127.0.0.1:27017/restaurantsDatabase')
+  .connect(dbUrl)
   .then(() => {
     console.log('Successfully connected to MongoDB.')
   })

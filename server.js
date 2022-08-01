@@ -4,6 +4,8 @@ const db = require('./db')
 
 const app = express()
 
+const { Restaurant } = require('./models')
+
 app.use(express.static(`${__dirname}/client/build`))
 
 app.get('/restaurants', (req, res) => {
