@@ -17,5 +17,8 @@
   "bugs": {
     "url": "https://github.com/scubastove4/MERN-code-along/issues"
   },
-  "homepage": "https://github.com/scubastove4/MERN-code-along#readme"
+  "homepage": "https://github.com/scubastove4/MERN-code-along#readme",
+  "dependencies": {
+    "express": "^4.18.1"
+  }
 }
