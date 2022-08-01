@@ -5,7 +5,7 @@ const app = express()
 
 app.use(express.static(`${__dirname}/client/build`))
 
-app.get('/', (req, res) => {
+app.get('/restaurants', (req, res) => {
   res.send('I am root')
 })
 
