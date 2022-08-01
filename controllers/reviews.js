@@ -7,10 +7,10 @@ const getAllReviews = async (req, res) => {
 }
 
 //create new restaurant
-// const createRestaurant = async (req, res) => {
-//   let newRestaurant = await Restaurant.create(req.body)
-//   res.send(newRestaurant)
-// }
+const createReview = async (req, res) => {
+  let newReview = await Review.create(req.body)
+  res.send(newReview)
+}
 
 //get one restaurant
 // const getRestaurantById = async (req, res) => {
@@ -19,5 +19,6 @@ const getAllReviews = async (req, res) => {
 // }
 
 module.exports = {
-  getAllReviews
+  getAllReviews,
+  createReview
 }
