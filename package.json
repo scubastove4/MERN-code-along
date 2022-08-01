@@ -1,0 +1,21 @@
+{
+  "name": "mern-code-long",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/scubastove4/MERN-code-along.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/scubastove4/MERN-code-along/issues"
+  },
+  "homepage": "https://github.com/scubastove4/MERN-code-along#readme"
+}
