@@ -1,4 +1,5 @@
 const { Review } = require('../models')
+const { Restaurant } = require('../models')
 
 //get all restaurants
 const getAllReviews = async (req, res) => {
@@ -9,7 +10,10 @@ const getAllReviews = async (req, res) => {
 //create new restaurant
 const createReview = async (req, res) => {
   let newReview = await Review.create(req.body)
-  res.send(newReview)
+  let restaurant = await Restaurant.findById(req.params.id)
+  restaurant.reviews.push(newReview._id)
+  restaurant.save()
+  res.send(restaurant)
 }
 
 // get one restaurant
