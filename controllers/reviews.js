@@ -26,9 +26,16 @@ const updateReview = async (req, res) => {
   res.send({ updatedReview })
 }
 
+// delete review
+const deleteReview = async (req, res) => {
+  let deletedReview = await Review.findByIdAndDelete(req.params.id)
+  res.send(deletedReview)
+}
+
 module.exports = {
   getAllReviews,
   createReview,
   getReviewById,
-  updateReview
+  updateReview,
+  deleteReview
 }
