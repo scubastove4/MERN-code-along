@@ -19,7 +19,6 @@ const App = () => {
   useEffect(() => {
     const getRestaurants = async () => {
       let res = await axios.get(`${BASE_URL}/api/restaurants`)
-      // console.log(res.data.restaurants)
       setRestaurants(res.data.restaurants)
     }
     getRestaurants()
@@ -33,7 +32,10 @@ const App = () => {
       <main>
         <Routes>
           <Route index element={<Home />} />
-          <Route path="/restaurants" element={<RestaurantList />} />
+          <Route
+            path="/restaurants"
+            element={<RestaurantList restaurants={restaurants} />}
+          />
           <Route
             path="restaurants/:restaurantId"
             element={<RestaurantDetails />}
