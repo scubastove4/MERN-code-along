@@ -1,5 +1,5 @@
 const RestaurantForm = () => {
-  return <div></div>
+  return <div>ResForm</div>
 }
 
 export default RestaurantForm
