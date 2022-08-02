@@ -19,7 +19,7 @@ const App = () => {
   useEffect(() => {
     const getRestaurants = async () => {
       let res = await axios.get(`${BASE_URL}/api/restaurants`)
-      setRestaurants(res.data.restaurants)
+      setRestaurants(res.data)
     }
     getRestaurants()
   }, [])
