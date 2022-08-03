@@ -131,3 +131,14 @@ nav {
   align-items: center;
   justify-content: center;
 }
+
+#rev-name-rate {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+#rev-name-rate h2 {
+  margin-right: 2%;
+}
