@@ -1,4 +1,4 @@
-import NavBar from './components/NavBar'
+import Nav from './components/Nav'
 import { Routes, Route } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 import axios from 'axios'
@@ -14,6 +14,7 @@ import { BASE_URL } from './globals'
 import './App.css'
 
 const App = () => {
+  const [anger, setAnger] = useState('😠')
   const [restaurants, setRestaurants] = useState([])
 
   useEffect(() => {
@@ -24,26 +25,39 @@ const App = () => {
     getRestaurants()
   }, [])
 
+  const toggleEmoji = () => {
+    if (anger === '😠') {
+      setAnger('😡')
+    } else if (anger === '😡') {
+      setAnger('🤬')
+    } else if (anger === '🤬') {
+      setAnger('😠')
+    }
+  }
+
   return (
-    <div>
+    <div className="app">
       <header>
-        <NavBar />
+        <Nav />
       </header>
       <main>
         <Routes>
-          <Route index element={<Home />} />
+          <Route
+            index
+            element={<Home toggleEmoji={toggleEmoji} anger={anger} />}
+          />
           <Route
             path="/restaurants"
             element={<RestaurantList restaurants={restaurants} />}
-          />
-          <Route
-            path="restaurants/:restaurantId"
-            element={<RestaurantDetails />}
           />
           <Route path="/add" element={<RestaurantForm />} />
           <Route
             path="/restaurants/:restaurantId/review/:reviewId"
             element={<ReviewDetails />}
+          />
+          <Route
+            path="/restaurants/:restaurantId"
+            element={<RestaurantDetails />}
           />
           <Route
             path="/restaurants/:restaurantId/review"
