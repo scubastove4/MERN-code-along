@@ -18,14 +18,13 @@ const ReviewForm = ({ formState, handleChange, handleSubmit }) => {
           value={formState.title}
           required
         />
-        <input
-          type="text"
+        <textarea
           name="body"
           placeholder="Review"
           onChange={handleChange}
           value={formState.body}
           required
-        />
+        ></textarea>
         <input
           type="text"
           name="name"

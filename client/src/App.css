@@ -1,6 +1,7 @@
 * {
   margin: 0;
   padding: 0;
+  font-family: 'Nanum Brush Script', cursive;
 }
 
 .app {
@@ -214,8 +215,36 @@ nav {
   background-color: #eb4d01;
 }
 
+.page h1 {
+  font-size: 4em;
+}
+
 .review-form {
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: flex-start;
+
+  height: 80vh;
+}
+
+.review-form input {
+  width: 50vw;
+  height: 8vh;
+  margin-bottom: 2%;
+  font-size: 2em;
+}
+
+.review-form select {
+  width: 50vw;
+  height: 8vh;
+  margin-bottom: 2%;
+  font-size: 2em;
+}
+
+textarea {
+  width: 50vw;
+  height: 20vh;
+  margin-bottom: 2%;
+  font-size: 2em;
 }
