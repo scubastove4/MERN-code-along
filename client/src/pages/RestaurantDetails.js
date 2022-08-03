@@ -1,6 +1,8 @@
+import { Link } from 'react-router-dom'
+
 import ReviewCard from '../components/ReviewCard'
 
-const RestaurantDetails = ({ selectedRestaurant }) => {
+const RestaurantDetails = ({ selectedRestaurant, deleteReview }) => {
   return (
     <section className="page">
       <div>
@@ -10,9 +12,24 @@ const RestaurantDetails = ({ selectedRestaurant }) => {
             <img src={selectedRestaurant.photo_url} alt="Restaurant" />
             <h1>{selectedRestaurant.location}</h1>
             <div className="reviews">
-              {selectedRestaurant.reviews.map((review) => (
-                <ReviewCard key={review._id} review={review} />
-              ))}
+              <h1>Reviews</h1>
+              <Link to={`/restaurants/${selectedRestaurant._id}/review`}>
+                Write A Review
+              </Link>
+              {selectedRestaurant.reviews.length > 0 ? (
+                <section>
+                  {selectedRestaurant.reviews.map((review, index) => (
+                    <ReviewCard
+                      key={review._id}
+                      review={review}
+                      index={index}
+                      deleteReview={deleteReview}
+                    />
+                  ))}
+                </section>
+              ) : (
+                <h2>Be the first to write a review!</h2>
+              )}
             </div>
           </main>
         ) : (

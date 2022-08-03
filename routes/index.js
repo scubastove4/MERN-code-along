@@ -5,14 +5,14 @@ const { restaurants, reviews } = require('../controllers') //could also destruct
 // restaurant routes
 router.get('/restaurants', restaurants.getAllRestaurants)
 router.post('/restaurants', restaurants.createRestaurant)
-router.get('/restaurants/:id', restaurants.getRestaurantById)
-router.post('/restaurants/:id/reviews', reviews.createReview)
+router.get('/restaurants/:restaurantId', restaurants.getRestaurantById)
+router.post('/restaurants/:restaurantId/review', reviews.createReview)
 // reviews.createReview)
 
 //review routes
 router.get('/reviews', reviews.getAllReviews)
-router.get('/reviews/:id', reviews.getReviewById)
-router.put('/reviews/:id', reviews.updateReview)
-router.delete('/reviews/:id', reviews.deleteReview)
+router.get('/reviews/:reviewId', reviews.getReviewById)
+router.put('/reviews/:reviewId', reviews.updateReview)
+router.delete('/reviews/:reviewId', reviews.deleteReview)
 
 module.exports = router

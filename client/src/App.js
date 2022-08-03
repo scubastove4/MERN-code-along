@@ -16,15 +16,24 @@ import './App.css'
 const App = () => {
   let navigate = useNavigate()
 
+  let initialFormState = {
+    name: '',
+    title: '',
+    body: '',
+    rating: Number()
+  }
+
   const [anger, setAnger] = useState('😠')
   const [restaurants, setRestaurants] = useState([])
   const [selectedRestaurant, setSelectedRestaurant] = useState(null)
+  const [formState, setFormState] = useState(initialFormState)
+
+  const getRestaurants = async () => {
+    let res = await axios.get(`${BASE_URL}/api/restaurants`)
+    setRestaurants(res.data)
+  }
 
   useEffect(() => {
-    const getRestaurants = async () => {
-      let res = await axios.get(`${BASE_URL}/api/restaurants`)
-      setRestaurants(res.data)
-    }
     getRestaurants()
   }, [])
 
@@ -41,6 +50,38 @@ const App = () => {
   const chooseRestaurant = (restaurant) => {
     setSelectedRestaurant(restaurant)
     navigate(`/restaurants/${restaurant._id}`)
+  }
+
+  const deleteReview = async (review, index) => {
+    await axios.delete(`${BASE_URL}/api/reviews/${review._id}`)
+    getRestaurants()
+    let modifiedRestaurant = selectedRestaurant
+    modifiedRestaurant.reviews.splice(index, 1)
+    setSelectedRestaurant(modifiedRestaurant)
+  }
+
+  const handleChange = (e) => {
+    setFormState({ ...formState, [e.target.name]: e.target.value })
+  }
+
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+    let res = await axios.post(
+      `${BASE_URL}/api/restaurants/${selectedRestaurant._id}/review`,
+      { ...formState, restaurant: selectedRestaurant._id }
+    )
+    await getRestaurants()
+    let modifiedRestaurant = selectedRestaurant
+    modifiedRestaurant.reviews.push(res.data)
+    setSelectedRestaurant(modifiedRestaurant)
+
+    setFormState({
+      name: '',
+      title: '',
+      body: '',
+      rating: Number()
+    })
+    navigate(`/restaurants/${selectedRestaurant._id}`)
   }
 
   return (
@@ -60,6 +101,7 @@ const App = () => {
               <RestaurantList
                 restaurants={restaurants}
                 chooseRestaurant={chooseRestaurant}
+                deleteReview={deleteReview}
               />
             }
           />
@@ -76,7 +118,13 @@ const App = () => {
           />
           <Route
             path="/restaurants/:restaurantId/review"
-            element={<ReviewForm />}
+            element={
+              <ReviewForm
+                formState={formState}
+                handleChange={handleChange}
+                handleSubmit={handleSubmit}
+              />
+            }
           />
         </Routes>
       </main>

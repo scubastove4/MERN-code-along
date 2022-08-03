@@ -3,7 +3,7 @@ const { Restaurant } = require('../models')
 //get all restaurants
 const getAllRestaurants = async (req, res) => {
   let restaurants = await Restaurant.find({}).populate('reviews')
-  res.send({ restaurants })
+  res.send(restaurants)
 }
 
 //create new restaurant
@@ -15,7 +15,7 @@ const createRestaurant = async (req, res) => {
 //get one restaurant
 const getRestaurantById = async (req, res) => {
   let restaurant = await Restaurant.findById(req.params.id).populate('reviews')
-  res.send({ restaurant })
+  res.send(restaurant)
 }
 
 module.exports = {
