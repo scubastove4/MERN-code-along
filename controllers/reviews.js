@@ -9,7 +9,7 @@ const getAllReviews = async (req, res) => {
 
 //create new restaurant
 const createReview = async (req, res) => {
-  let restaurant = await Restaurant.findById(req.params.id)
+  let restaurant = await Restaurant.findById(req.params.restaurantId)
   let newReview = await Review.create(req.body)
   restaurant.reviews.push(newReview._id)
   restaurant.save()
@@ -18,21 +18,25 @@ const createReview = async (req, res) => {
 
 // get one restaurant
 const getReviewById = async (req, res) => {
-  let review = await Review.findById(req.params.id).populate('restaurant')
+  let review = await Review.findById(req.params.reviewId).populate('restaurant')
   res.send(review)
 }
 
 // update review
 const updateReview = async (req, res) => {
-  let updatedReview = await Review.findByIdAndUpdate(req.params.id, req.body, {
-    new: true
-  })
+  let updatedReview = await Review.findByIdAndUpdate(
+    req.params.reviewId,
+    req.body,
+    {
+      new: true
+    }
+  )
   res.send(updatedReview)
 }
 
 // delete review
 const deleteReview = async (req, res) => {
-  let deletedReview = await Review.findByIdAndDelete(req.params.id)
+  let deletedReview = await Review.findByIdAndDelete(req.params.reviewId)
   res.send(deletedReview)
 }
 

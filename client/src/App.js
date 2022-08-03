@@ -27,6 +27,7 @@ const App = () => {
   const [restaurants, setRestaurants] = useState([])
   const [selectedRestaurant, setSelectedRestaurant] = useState(null)
   const [formState, setFormState] = useState(initialFormState)
+  const [editing, setEditing] = useState(false)
 
   const getRestaurants = async () => {
     let res = await axios.get(`${BASE_URL}/api/restaurants`)
@@ -52,6 +53,20 @@ const App = () => {
     navigate(`/restaurants/${restaurant._id}`)
   }
 
+  const newReview = () => {
+    setEditing(false)
+    setFormState(initialFormState)
+    navigate(`/restaurants/${selectedRestaurant._id}/review`)
+  }
+
+  const editReview = (review, index) => {
+    setFormState(review)
+    setEditing(true)
+    navigate(`/restaurants/${selectedRestaurant._id}/review`, {
+      state: { index: index }
+    })
+  }
+
   const deleteReview = async (review, index) => {
     await axios.delete(`${BASE_URL}/api/reviews/${review._id}`)
     getRestaurants()
@@ -64,23 +79,36 @@ const App = () => {
     setFormState({ ...formState, [e.target.name]: e.target.value })
   }
 
-  const handleSubmit = async (e) => {
-    e.preventDefault()
+  const createNewReview = async () => {
     let res = await axios.post(
       `${BASE_URL}/api/restaurants/${selectedRestaurant._id}/review`,
       { ...formState, restaurant: selectedRestaurant._id }
     )
-    await getRestaurants()
     let modifiedRestaurant = selectedRestaurant
     modifiedRestaurant.reviews.push(res.data)
     setSelectedRestaurant(modifiedRestaurant)
+  }
 
-    setFormState({
-      name: '',
-      title: '',
-      body: '',
-      rating: Number()
-    })
+  const updateReview = async (index) => {
+    let res = await axios.put(
+      `${BASE_URL}/api/reviews/${formState._id}`,
+      formState
+    )
+    let modifiedRestaurant = selectedRestaurant
+    modifiedRestaurant.reviews.splice(index, 1, res.data)
+    setSelectedRestaurant(modifiedRestaurant)
+  }
+
+  const handleSubmit = async (e, index) => {
+    e.preventDefault()
+    if (!editing) {
+      await createNewReview()
+    } else {
+      await updateReview(index)
+    }
+    await getRestaurants()
+    setFormState(initialFormState)
+    setEditing(false)
     navigate(`/restaurants/${selectedRestaurant._id}`)
   }
 
@@ -113,7 +141,11 @@ const App = () => {
           <Route
             path="/restaurants/:restaurantId"
             element={
-              <RestaurantDetails selectedRestaurant={selectedRestaurant} />
+              <RestaurantDetails
+                selectedRestaurant={selectedRestaurant}
+                editReview={editReview}
+                newReview={newReview}
+              />
             }
           />
           <Route

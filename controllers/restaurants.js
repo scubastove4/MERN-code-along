@@ -14,7 +14,9 @@ const createRestaurant = async (req, res) => {
 
 //get one restaurant
 const getRestaurantById = async (req, res) => {
-  let restaurant = await Restaurant.findById(req.params.id).populate('reviews')
+  let restaurant = await Restaurant.findById(req.params.restaurantId).populate(
+    'reviews'
+  )
   res.send(restaurant)
 }
 
