@@ -129,7 +129,6 @@ const App = () => {
               <RestaurantList
                 restaurants={restaurants}
                 chooseRestaurant={chooseRestaurant}
-                deleteReview={deleteReview}
               />
             }
           />
@@ -143,8 +142,9 @@ const App = () => {
             element={
               <RestaurantDetails
                 selectedRestaurant={selectedRestaurant}
-                editReview={editReview}
                 newReview={newReview}
+                editReview={editReview}
+                deleteReview={deleteReview}
               />
             }
           />

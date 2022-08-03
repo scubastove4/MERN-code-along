@@ -1,5 +1,3 @@
-import { Link } from 'react-router-dom'
-
 import ReviewCard from '../components/ReviewCard'
 
 const RestaurantDetails = ({
